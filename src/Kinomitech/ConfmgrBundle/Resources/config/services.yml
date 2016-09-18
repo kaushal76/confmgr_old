@@ -1,0 +1,4 @@
+services:
+#    kinomitech_confmgr.example:
+#        class: Kinomitech\ConfmgrBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
