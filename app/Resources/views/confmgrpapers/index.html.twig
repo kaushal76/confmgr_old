@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConfmgrPapers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Papertitle</th>
+                <th>Paperowner</th>
+                <th>Paperabstract</th>
+                <th>Paperfullpaper</th>
+                <th>Papercameraready</th>
+                <th>Papertheme</th>
+                <th>Paperdatecreated</th>
+                <th>Paperdatemodified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for confmgrPaper in confmgrPapers %}
+            <tr>
+                <td><a href="{{ path('papers_show', { 'id': confmgrPaper.id }) }}">{{ confmgrPaper.id }}</a></td>
+                <td>{{ confmgrPaper.paperTitle }}</td>
+                <td>{{ confmgrPaper.paperOwner }}</td>
+                <td>{{ confmgrPaper.paperAbstract }}</td>
+                <td>{{ confmgrPaper.paperFullPaper }}</td>
+                <td>{{ confmgrPaper.paperCameraReady }}</td>
+                <td>{{ confmgrPaper.paperTheme }}</td>
+                <td>{% if confmgrPaper.paperDateCreated %}{{ confmgrPaper.paperDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if confmgrPaper.paperDateModified %}{{ confmgrPaper.paperDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('papers_show', { 'id': confmgrPaper.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('papers_edit', { 'id': confmgrPaper.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('papers_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

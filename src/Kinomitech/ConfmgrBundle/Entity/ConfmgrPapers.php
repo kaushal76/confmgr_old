@@ -76,7 +76,7 @@ class ConfmgrPapers
      * @ORM\Column(name="paper_date_modified", type="datetime", nullable=true)
      */
     private $paperDateModified;
-
+    
 
     /**
      * Get id
