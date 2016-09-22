@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ConfmgrThemes
@@ -34,6 +35,12 @@ class ConfmgrThemes
      * @ORM\Column(name="theme_description", type="text")
      */
     private $themeDescription;
+    
+
+    /**
+     * @ORM\OneToMany(targetEntity="ConfmgrPapers", mappedBy="paperTheme")
+     */
+    protected $themePapers;
 
     /**
      * @var \DateTime
@@ -48,7 +55,13 @@ class ConfmgrThemes
      * @ORM\Column(name="theme_date_modified", type="datetime")
      */
     private $themeDateModified;
-
+    
+    
+    
+    public function __construct() {
+        $this->themePapers = new ArrayCollection();
+    }
+    
 
     /**
      * Get id

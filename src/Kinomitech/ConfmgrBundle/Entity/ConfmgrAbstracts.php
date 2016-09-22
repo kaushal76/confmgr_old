@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ConfmgrAbstracts
@@ -48,6 +49,11 @@ class ConfmgrAbstracts
      * @ORM\Column(name="abstract_review_outcome", type="integer", nullable=true)
      */
     private $abstractReviewOutcome;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ConfmgrAbstractReviews", mappedBy="abstractReviewAbstract")
+     */
+    protected $abstractReviews;
 
     /**
      * @var \DateTime

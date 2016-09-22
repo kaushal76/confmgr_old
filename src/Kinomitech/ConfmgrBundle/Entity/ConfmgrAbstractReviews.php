@@ -36,11 +36,20 @@ class ConfmgrAbstractReviews
     private $abstractReviewScore;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="abstract_review_recommendation", type="integer")
+     * @var abstractReviewRecommendation the Recommendation related this review
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrReviewOutcomes")
+     * @ORM\JoinColumn(name="abstract_review_recommendation_id", referencedColumnName="id")
      */
     private $abstractReviewRecommendation;
+    
+    /**
+     * @var abstractReviewAbstract the abstract related this review
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrAbstracts", inversedBy="abstractReviews")
+     * @ORM\JoinColumn(name="abstract_review_abstract_id", referencedColumnName="id")
+     */
+    private $abstractReviewAbstract;
 
     /**
      * @var \DateTime

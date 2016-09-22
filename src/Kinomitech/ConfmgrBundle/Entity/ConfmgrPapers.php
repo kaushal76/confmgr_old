@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ConfmgrPapers
@@ -29,37 +30,39 @@ class ConfmgrPapers
     private $paperTitle;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="paper_owner", type="integer")
+     * @var PaperOwner the owner this paper belongs to
+     * 
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="themePapers")
+     * @ORM\JoinColumn(name="paper_owner_id", referencedColumnName="id")
      */
     private $paperOwner;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="paper_abstract", type="integer", nullable=true)
+     * @var paperAbsrtact the absrtact for the paper
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrAbstracts", mappedBy="abstractPaper")
      */
-    private $paperAbstract;
+    private $paperAbstracts;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="paper_full_paper", type="integer", nullable=true)
+     * @var paperFullPaper the full paper for this paper
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrFullPapers", mappedBy="fullPaper")
      */
-    private $paperFullPaper;
+    private $paperFullPapers;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="paper_camera_ready", type="integer", nullable=true)
+     * @var paperCameraReadyPaper the camera ready paper for this paper
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrCameraReadyPapers", mappedBy="cameraPaper")
      */
-    private $paperCameraReady;
+    private $paperCameraReadyPapers;
     
     /**
-     * @var int
-     *
-     * @ORM\Column(name="paper_theme", type="integer")
+     * @var PaperTheme the theme this paper belongs
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrThemes", inversedBy="themePapers")
+     * @ORM\JoinColumn(name="paper_theme_id", referencedColumnName="id")
      */
     private $paperTheme;
 
@@ -77,7 +80,12 @@ class ConfmgrPapers
      */
     private $paperDateModified;
     
-
+    public function __construct() {
+        $this->paperAbstracts = new ArrayCollection();
+        $this->paperFullPapers = new ArrayCollection();
+        $this->paperCameraReadyPapers = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -134,74 +142,6 @@ class ConfmgrPapers
         return $this->paperOwner;
     }
 
-    /**
-     * Set paperAbstract
-     *
-     * @param integer $paperAbstract
-     * @return ConfmgrPapers
-     */
-    public function setPaperAbstract($paperAbstract)
-    {
-        $this->paperAbstract = $paperAbstract;
-
-        return $this;
-    }
-
-    /**
-     * Get paperAbstract
-     *
-     * @return integer 
-     */
-    public function getPaperAbstract()
-    {
-        return $this->paperAbstract;
-    }
-
-    /**
-     * Set paperFullPaper
-     *
-     * @param integer $paperFullPaper
-     * @return ConfmgrPapers
-     */
-    public function setPaperFullPaper($paperFullPaper)
-    {
-        $this->paperFullPaper = $paperFullPaper;
-
-        return $this;
-    }
-
-    /**
-     * Get paperFullPaper
-     *
-     * @return integer 
-     */
-    public function getPaperFullPaper()
-    {
-        return $this->paperFullPaper;
-    }
-
-    /**
-     * Set paperCameraReady
-     *
-     * @param integer $paperCameraReady
-     * @return ConfmgrPapers
-     */
-    public function setPaperCameraReady($paperCameraReady)
-    {
-        $this->paperCameraReady = $paperCameraReady;
-
-        return $this;
-    }
-
-    /**
-     * Get paperCameraReady
-     *
-     * @return integer 
-     */
-    public function getPaperCameraReady()
-    {
-        return $this->paperCameraReady;
-    }
     
     /**
      * Get paperTheme
@@ -257,5 +197,117 @@ class ConfmgrPapers
     public function getPaperDateModified()
     {
         return $this->paperDateModified;
+    }
+
+    /**
+     * Add paperAbstracts
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstracts $paperAbstracts
+     * @return ConfmgrPapers
+     */
+    public function addPaperAbstract(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstracts $paperAbstracts)
+    {
+        $this->paperAbstracts[] = $paperAbstracts;
+
+        return $this;
+    }
+
+    /**
+     * Remove paperAbstracts
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstracts $paperAbstracts
+     */
+    public function removePaperAbstract(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstracts $paperAbstracts)
+    {
+        $this->paperAbstracts->removeElement($paperAbstracts);
+    }
+
+    /**
+     * Get paperAbstracts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaperAbstracts()
+    {
+        return $this->paperAbstracts;
+    }
+
+    /**
+     * Add paperFullPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrFullPapers $paperFullPapers
+     * @return ConfmgrPapers
+     */
+    public function addPaperFullPaper(\Kinomitech\ConfmgrBundle\Entity\ConfmgrFullPapers $paperFullPapers)
+    {
+        $this->paperFullPapers[] = $paperFullPapers;
+
+        return $this;
+    }
+
+    /**
+     * Remove paperFullPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrFullPapers $paperFullPapers
+     */
+    public function removePaperFullPaper(\Kinomitech\ConfmgrBundle\Entity\ConfmgrFullPapers $paperFullPapers)
+    {
+        $this->paperFullPapers->removeElement($paperFullPapers);
+    }
+
+    /**
+     * Get paperFullPapers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaperFullPapers()
+    {
+        return $this->paperFullPapers;
+    }
+
+    /**
+     * Add paperCameraReadyPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrCameraReadyPapers $paperCameraReadyPapers
+     * @return ConfmgrPapers
+     */
+    public function addPaperCameraReadyPaper(\Kinomitech\ConfmgrBundle\Entity\ConfmgrCameraReadyPapers $paperCameraReadyPapers)
+    {
+        $this->paperCameraReadyPapers[] = $paperCameraReadyPapers;
+
+        return $this;
+    }
+
+    /**
+     * Remove paperCameraReadyPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrCameraReadyPapers $paperCameraReadyPapers
+     */
+    public function removePaperCameraReadyPaper(\Kinomitech\ConfmgrBundle\Entity\ConfmgrCameraReadyPapers $paperCameraReadyPapers)
+    {
+        $this->paperCameraReadyPapers->removeElement($paperCameraReadyPapers);
+    }
+
+    /**
+     * Get paperCameraReadyPapers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaperCameraReadyPapers()
+    {
+        return $this->paperCameraReadyPapers;
+    }
+
+    /**
+     * Set paperTheme
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrThemes $paperTheme
+     * @return ConfmgrPapers
+     */
+    public function setPaperTheme(\Kinomitech\ConfmgrBundle\Entity\ConfmgrThemes $paperTheme = null)
+    {
+        $this->paperTheme = $paperTheme;
+
+        return $this;
     }
 }
