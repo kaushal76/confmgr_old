@@ -48,6 +48,14 @@ class ConfmgrFullPapers
      * @ORM\Column(name="full_date_modified", type="datetime")
      */
     private $fullDateModified;
+    
+    /**
+     * @var fullPaper the paper this full paper attached to
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperFullPapers")
+     * @ORM\JoinColumn(name="full_paper_id", referencedColumnName="id")
+     */
+    private $fullPaper;
 
 
     /**

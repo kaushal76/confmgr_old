@@ -41,6 +41,14 @@ class ConfmgrCameraReadyPapers
      * @ORM\Column(name="camera_date_modified", type="datetime")
      */
     private $cameraDateModified;
+    
+     /**
+     * @var cameraPaper the paper this camera paper attached to
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperCameraReadyPapers")
+     * @ORM\JoinColumn(name="camera_paper_id", referencedColumnName="id")
+     */
+    private $cameraPaper;
 
 
     /**

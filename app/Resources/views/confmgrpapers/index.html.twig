@@ -8,11 +8,6 @@
             <tr>
                 <th>Id</th>
                 <th>Papertitle</th>
-                <th>Paperowner</th>
-                <th>Paperabstract</th>
-                <th>Paperfullpaper</th>
-                <th>Papercameraready</th>
-                <th>Papertheme</th>
                 <th>Paperdatecreated</th>
                 <th>Paperdatemodified</th>
                 <th>Actions</th>
@@ -23,11 +18,6 @@
             <tr>
                 <td><a href="{{ path('papers_show', { 'id': confmgrPaper.id }) }}">{{ confmgrPaper.id }}</a></td>
                 <td>{{ confmgrPaper.paperTitle }}</td>
-                <td>{{ confmgrPaper.paperOwner }}</td>
-                <td>{{ confmgrPaper.paperAbstract }}</td>
-                <td>{{ confmgrPaper.paperFullPaper }}</td>
-                <td>{{ confmgrPaper.paperCameraReady }}</td>
-                <td>{{ confmgrPaper.paperTheme }}</td>
                 <td>{% if confmgrPaper.paperDateCreated %}{{ confmgrPaper.paperDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if confmgrPaper.paperDateModified %}{{ confmgrPaper.paperDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>

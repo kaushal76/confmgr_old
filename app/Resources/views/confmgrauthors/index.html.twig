@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConfmgrAuthors list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Authortitle</th>
+                <th>Authorfirstname</th>
+                <th>Authorsurname</th>
+                <th>Authoraffiliation</th>
+                <th>Authordatecreated</th>
+                <th>Authordatemodified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for confmgrAuthor in confmgrAuthors %}
+            <tr>
+                <td><a href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">{{ confmgrAuthor.id }}</a></td>
+                <td>{{ confmgrAuthor.authorTitle }}</td>
+                <td>{{ confmgrAuthor.authorFirstName }}</td>
+                <td>{{ confmgrAuthor.authorSurname }}</td>
+                <td>{{ confmgrAuthor.authorAffiliation }}</td>
+                <td>{% if confmgrAuthor.authorDateCreated %}{{ confmgrAuthor.authorDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if confmgrAuthor.authorDateModified %}{{ confmgrAuthor.authorDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('authors_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

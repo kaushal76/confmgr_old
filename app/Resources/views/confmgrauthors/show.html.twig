@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConfmgrAuthors</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ confmgrAuthor.id }}</td>
+            </tr>
+            <tr>
+                <th>Authortitle</th>
+                <td>{{ confmgrAuthor.authorTitle }}</td>
+            </tr>
+            <tr>
+                <th>Authorfirstname</th>
+                <td>{{ confmgrAuthor.authorFirstName }}</td>
+            </tr>
+            <tr>
+                <th>Authorsurname</th>
+                <td>{{ confmgrAuthor.authorSurname }}</td>
+            </tr>
+            <tr>
+                <th>Authoraffiliation</th>
+                <td>{{ confmgrAuthor.authorAffiliation }}</td>
+            </tr>
+            <tr>
+                <th>Authordatecreated</th>
+                <td>{% if confmgrAuthor.authorDateCreated %}{{ confmgrAuthor.authorDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Authordatemodified</th>
+                <td>{% if confmgrAuthor.authorDateModified %}{{ confmgrAuthor.authorDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('authors_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

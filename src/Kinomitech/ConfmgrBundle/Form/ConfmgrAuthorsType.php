@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ConfmgrPapersType extends AbstractType
+class ConfmgrAuthorsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,12 @@ class ConfmgrPapersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('paperTitle')
-            ->add('paperDateCreated', 'datetime')
-            ->add('paperDateModified', 'datetime')
-            ->add('Owner')
-            ->add('paperTheme')
+            ->add('authorTitle')
+            ->add('authorFirstName')
+            ->add('authorSurname')
+            ->add('authorAffiliation')
+            ->add('authorDateCreated', 'datetime')
+            ->add('authorDateModified', 'datetime')
         ;
     }
     
@@ -29,7 +30,7 @@ class ConfmgrPapersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Kinomitech\ConfmgrBundle\Entity\ConfmgrPapers'
+            'data_class' => 'Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthors'
         ));
     }
 }

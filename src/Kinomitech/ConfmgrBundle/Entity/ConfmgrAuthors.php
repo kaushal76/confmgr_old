@@ -48,6 +48,13 @@ class ConfmgrAuthors
      * @ORM\Column(name="author_affiliation", type="string", length=255, nullable=true)
      */
     private $authorAffiliation;
+    
+     /**
+     * @var authorPapers the papers for the author
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apAuthor")
+     */
+    private $authorPaperAssociation;
 
     /**
      * @var \DateTime
@@ -210,5 +217,60 @@ class ConfmgrAuthors
     public function getAuthorDateModified()
     {
         return $this->authorDateModified;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authorPaperAssociation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add authorPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation
+     * @return ConfmgrAuthors
+     */
+    public function addAuthorPaperAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation)
+    {
+        $this->authorPaperAssociation[] = $authorPaperAssociation;
+
+        return $this;
+    }
+
+    /**
+     * Remove authorPapers
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation
+     */
+    public function removeAuthorPaperAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation)
+    {
+        $this->authorPaperAssociation->removeElement($authorPaperAssociation);
+    }
+
+    /**
+     * Get authorPapers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthorPaperAssociations()
+    {
+        return $this->authorPaperAssociation;
+    }
+    
+    public function __toString()
+    {
+        return (string) $this->getAuthorFirstName();
+    }
+
+    /**
+     * Get authorPaperAssociation
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthorPaperAssociation()
+    {
+        return $this->authorPaperAssociation;
     }
 }

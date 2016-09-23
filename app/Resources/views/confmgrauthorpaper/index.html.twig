@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConfmgrAuthorPaper list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Apposition</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for confmgrAuthorPaper in confmgrAuthorPapers %}
+            <tr>
+                <td><a href="{{ path('authorpaper_show', { 'id': confmgrAuthorPaper.id }) }}">{{ confmgrAuthorPaper.id }}</a></td>
+                <td>{{ confmgrAuthorPaper.apPosition }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('authorpaper_show', { 'id': confmgrAuthorPaper.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('authorpaper_edit', { 'id': confmgrAuthorPaper.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('authorpaper_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

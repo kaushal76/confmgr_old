@@ -43,14 +43,17 @@ class ConfmgrAbstracts
      */
     private $abstractEditorsComment;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="abstract_review_outcome", type="integer", nullable=true)
+     /**
+     * @var abstractReviewOutcome the review outcome for this abstract
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrReviewOutcomes")
+     * @ORM\JoinColumn(name="abstract_review_outcome_id", referencedColumnName="id")
      */
     private $abstractReviewOutcome;
     
     /**
+     * @var abstractReview the reviews for the abstract
+     * 
      * @ORM\OneToMany(targetEntity="ConfmgrAbstractReviews", mappedBy="abstractReviewAbstract")
      */
     protected $abstractReviews;
@@ -68,7 +71,15 @@ class ConfmgrAbstracts
      * @ORM\Column(name="abstract_date_modified", type="datetime")
      */
     private $abstractDateModified;
-
+    
+    /**
+     * @var abstractPaper the paper this Abstract attached to
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAbstracts")
+     * @ORM\JoinColumn(name="abstract_paper_id", referencedColumnName="id")
+     */
+    private $abstractPaper;
+  
 
     /**
      * Get id
@@ -150,29 +161,6 @@ class ConfmgrAbstracts
     }
 
     /**
-     * Set abstractReviewOutcome
-     *
-     * @param integer $abstractReviewOutcome
-     * @return ConfmgrAbstracts
-     */
-    public function setAbstractReviewOutcome($abstractReviewOutcome)
-    {
-        $this->abstractReviewOutcome = $abstractReviewOutcome;
-
-        return $this;
-    }
-
-    /**
-     * Get abstractReviewOutcome
-     *
-     * @return integer 
-     */
-    public function getAbstractReviewOutcome()
-    {
-        return $this->abstractReviewOutcome;
-    }
-
-    /**
      * Set abstractDateCreated
      *
      * @param \DateTime $abstractDateCreated
@@ -216,5 +204,91 @@ class ConfmgrAbstracts
     public function getAbstractDateModified()
     {
         return $this->abstractDateModified;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->abstractReviews = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set abstractReviewOutcome
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrReviewOutcomes $abstractReviewOutcome
+     * @return ConfmgrAbstracts
+     */
+    public function setAbstractReviewOutcome(\Kinomitech\ConfmgrBundle\Entity\ConfmgrReviewOutcomes $abstractReviewOutcome = null)
+    {
+        $this->abstractReviewOutcome = $abstractReviewOutcome;
+
+        return $this;
+    }
+
+    /**
+     * Get abstractReviewOutcome
+     *
+     * @return \Kinomitech\ConfmgrBundle\Entity\ConfmgrReviewOutcomes 
+     */
+    public function getAbstractReviewOutcome()
+    {
+        return $this->abstractReviewOutcome;
+    }
+
+    /**
+     * Add abstractReviews
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstractReviews $abstractReviews
+     * @return ConfmgrAbstracts
+     */
+    public function addAbstractReview(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstractReviews $abstractReviews)
+    {
+        $this->abstractReviews[] = $abstractReviews;
+
+        return $this;
+    }
+
+    /**
+     * Remove abstractReviews
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstractReviews $abstractReviews
+     */
+    public function removeAbstractReview(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAbstractReviews $abstractReviews)
+    {
+        $this->abstractReviews->removeElement($abstractReviews);
+    }
+
+    /**
+     * Get abstractReviews
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAbstractReviews()
+    {
+        return $this->abstractReviews;
+    }
+
+    /**
+     * Set abstractPaper
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrPapers $abstractPaper
+     * @return ConfmgrAbstracts
+     */
+    public function setAbstractPaper(\Kinomitech\ConfmgrBundle\Entity\ConfmgrPapers $abstractPaper = null)
+    {
+        $this->abstractPaper = $abstractPaper;
+
+        return $this;
+    }
+
+    /**
+     * Get abstractPaper
+     *
+     * @return \Kinomitech\ConfmgrBundle\Entity\ConfmgrPapers 
+     */
+    public function getAbstractPaper()
+    {
+        return $this->abstractPaper;
     }
 }

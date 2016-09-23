@@ -25,34 +25,40 @@ class ConfmgrPapers
     /**
      * @var string
      *
-     * @ORM\Column(name="paper_title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="paper_title", type="string", length=255)
      */
     private $paperTitle;
 
     /**
      * @var PaperOwner the owner this paper belongs to
      * 
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="themePapers")
-     * @ORM\JoinColumn(name="paper_owner_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userPapers")
+     * 
      */
-    private $paperOwner;
+    private $Owner;
 
     /**
-     * @var paperAbsrtact the absrtact for the paper
+     * @var paperAbstracts the abstracts for the paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrAbstracts", mappedBy="abstractPaper")
      */
     private $paperAbstracts;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apPaper")
+     * 
+     */
+    private $paperAuthorAssociation;
 
     /**
-     * @var paperFullPaper the full paper for this paper
+     * @var paperFullPapers the full paper for this paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrFullPapers", mappedBy="fullPaper")
      */
     private $paperFullPapers;
 
     /**
-     * @var paperCameraReadyPaper the camera ready paper for this paper
+     * @var paperCameraReadyPapers the camera ready paper for this paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrCameraReadyPapers", mappedBy="cameraPaper")
      */
@@ -84,6 +90,7 @@ class ConfmgrPapers
         $this->paperAbstracts = new ArrayCollection();
         $this->paperFullPapers = new ArrayCollection();
         $this->paperCameraReadyPapers = new ArrayCollection();
+        $this->paperAuthorAssociation = new ArrayCollection();
     }
     
     /**
@@ -118,31 +125,7 @@ class ConfmgrPapers
     {
         return $this->paperTitle;
     }
-
-    /**
-     * Set paperOwner
-     *
-     * @param integer $paperOwner
-     * @return ConfmgrPapers
-     */
-    public function setPaperOwner($paperOwner)
-    {
-        $this->paperOwner = $paperOwner;
-
-        return $this;
-    }
-
-    /**
-     * Get paperOwner
-     *
-     * @return integer 
-     */
-    public function getPaperOwner()
-    {
-        return $this->paperOwner;
-    }
-
-    
+   
     /**
      * Get paperTheme
      *
@@ -309,5 +292,100 @@ class ConfmgrPapers
         $this->paperTheme = $paperTheme;
 
         return $this;
+    }
+
+    /**
+     * Add paperAuthors
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
+     * @return ConfmgrPapers
+     */
+    public function addPaperAuthor(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    {
+        $this->paperAuthorAssociation[] = $paperAuthorAssociation;
+
+        return $this;
+    }
+
+    /**
+     * Remove paperAuthors
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
+     */
+    public function removePaperAuthor(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    {
+        $this->paperAuthorAssociation->removeElement($paperAuthorAssociation);
+    }
+
+    /**
+     * Get paperAuthors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaperAuthorAssociations()
+    {
+        return $this->paperAuthorAssociation;
+    }
+    
+    public function __toString()
+    {
+        return (string) $this->getPaperTitle();
+    }
+    
+
+    /**
+     * Add paperAuthorAssociation
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
+     * @return ConfmgrPapers
+     */
+    public function addPaperAuthorAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    {
+        $this->paperAuthorAssociation[] = $paperAuthorAssociation;
+
+        return $this;
+    }
+
+    /**
+     * Remove paperAuthorAssociation
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
+     */
+    public function removePaperAuthorAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    {
+        $this->paperAuthorAssociation->removeElement($paperAuthorAssociation);
+    }
+
+    /**
+     * Get paperAuthorAssociation
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaperAuthorAssociation()
+    {
+        return $this->paperAuthorAssociation;
+    }
+
+    /**
+     * Set Owner
+     *
+     * @param \Kinomitech\ConfmgrBundle\Entity\User $owner
+     * @return ConfmgrPapers
+     */
+    public function setOwner(\Kinomitech\ConfmgrBundle\Entity\User $owner = null)
+    {
+        $this->Owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get Owner
+     *
+     * @return \Kinomitech\ConfmgrBundle\Entity\User 
+     */
+    public function getOwner()
+    {
+        return $this->Owner;
     }
 }
