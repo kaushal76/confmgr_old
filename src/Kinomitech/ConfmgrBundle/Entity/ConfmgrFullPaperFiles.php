@@ -55,7 +55,7 @@ class ConfmgrFullPaperFiles
     /**
      * @var fpFileFullPaper the full paper related this files
      * 
-     * @ORM\ManyToOne(targetEntity="ConfmgrFullPapers")
+     * @ORM\ManyToOne(targetEntity="ConfmgrFullPapers", inversedBy="fullFiles")
      * @ORM\JoinColumn(name="fp_file_paper_id", referencedColumnName="id")
      */
     private $fpFileFullPaper;

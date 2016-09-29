@@ -24,14 +24,14 @@ class ConfmgrAuthorPaper
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ConfmgrAuthors", inversedBy="authorPaperAssociation")
+     * @ORM\ManyToOne(targetEntity="ConfmgrAuthors", inversedBy="authorPaperAssociations")
      * @ORM\JoinColumn(name="ap_author_id", referencedColumnName="id")
      */
     private $apAuthor;
 
     /**
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAuthorAssociation")
+     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAuthorAssociations")
      * @ORM\JoinColumn(name="ap_paper_id", referencedColumnName="id")
      */
     private $apPaper;

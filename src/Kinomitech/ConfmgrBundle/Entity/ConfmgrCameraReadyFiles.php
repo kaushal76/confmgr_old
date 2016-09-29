@@ -55,7 +55,7 @@ class ConfmgrCameraReadyFiles
     /**
      * @var crFileCameraPaper the camera ready paper related this files
      * 
-     * @ORM\ManyToOne(targetEntity="ConfmgrCameraReadyPapers")
+     * @ORM\ManyToOne(targetEntity="ConfmgrCameraReadyPapers", inversedBy="cameraFiles")
      * @ORM\JoinColumn(name="cr_file_camera_ready_paper_id", referencedColumnName="id")
      */
     private $crFileCameraPaper;

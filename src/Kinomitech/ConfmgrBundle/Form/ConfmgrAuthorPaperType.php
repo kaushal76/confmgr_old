@@ -18,7 +18,9 @@ class ConfmgrAuthorPaperType extends AbstractType
             //->add('apPosition')
             //->add('apDateCreated', 'datetime')
             //->add('apDateModified', 'datetime')
-            ->add('apAuthor')
+            ->add('apAuthor', 'entity', 
+                    array('property'=>'authorFirstName',
+                        'class'=> 'KinomitechConfmgrBundle:ConfmgrAuthors'))
             ->add('apPaper')
         ;
     }
