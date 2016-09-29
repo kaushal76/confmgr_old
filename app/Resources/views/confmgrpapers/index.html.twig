@@ -10,6 +10,8 @@
                 <th>Papertitle</th>
                 <th>Paperdatecreated</th>
                 <th>Paperdatemodified</th>
+                <th>Papercreatedby</th>
+                <th>Paperupdatedby</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +22,8 @@
                 <td>{{ confmgrPaper.paperTitle }}</td>
                 <td>{% if confmgrPaper.paperDateCreated %}{{ confmgrPaper.paperDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if confmgrPaper.paperDateModified %}{{ confmgrPaper.paperDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ confmgrPaper.paperCreatedBy }}</td>
+                <td>{{ confmgrPaper.paperUpdatedBy }}</td>
                 <td>
                     <ul>
                         <li>

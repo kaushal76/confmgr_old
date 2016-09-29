@@ -3,6 +3,8 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * ConfmgrReviewers
@@ -50,16 +52,18 @@ class ConfmgrReviewers
     private $reviewerAffiliation;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="reviewer_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $reviewerDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="reviewer_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $reviewerDateModified;
 
@@ -166,18 +170,6 @@ class ConfmgrReviewers
         return $this->reviewerAffiliation;
     }
 
-    /**
-     * Set reviewerDateCreated
-     *
-     * @param \DateTime $reviewerDateCreated
-     * @return ConfmgrReviewers
-     */
-    public function setReviewerDateCreated($reviewerDateCreated)
-    {
-        $this->reviewerDateCreated = $reviewerDateCreated;
-
-        return $this;
-    }
 
     /**
      * Get reviewerDateCreated
@@ -187,19 +179,6 @@ class ConfmgrReviewers
     public function getReviewerDateCreated()
     {
         return $this->reviewerDateCreated;
-    }
-
-    /**
-     * Set reviewerDateModified
-     *
-     * @param \DateTime $reviewerDateModified
-     * @return ConfmgrReviewers
-     */
-    public function setReviewerDateModified($reviewerDateModified)
-    {
-        $this->reviewerDateModified = $reviewerDateModified;
-
-        return $this;
     }
 
     /**

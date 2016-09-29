@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrReviewOutcomes
@@ -36,16 +37,18 @@ class ConfmgrReviewOutcomes
     private $roDescription;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="ro_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $roDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="ro_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $roDateModified;
 
@@ -107,19 +110,6 @@ class ConfmgrReviewOutcomes
     }
 
     /**
-     * Set roDateCreated
-     *
-     * @param \DateTime $roDateCreated
-     * @return ConfmgrReviewOutcomes
-     */
-    public function setRoDateCreated($roDateCreated)
-    {
-        $this->roDateCreated = $roDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get roDateCreated
      *
      * @return \DateTime 
@@ -127,19 +117,6 @@ class ConfmgrReviewOutcomes
     public function getRoDateCreated()
     {
         return $this->roDateCreated;
-    }
-
-    /**
-     * Set roDateModified
-     *
-     * @param \DateTime $roDateModified
-     * @return ConfmgrReviewOutcomes
-     */
-    public function setRoDateModified($roDateModified)
-    {
-        $this->roDateModified = $roDateModified;
-
-        return $this;
     }
 
     /**

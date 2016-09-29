@@ -4,6 +4,7 @@ namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrPapers
@@ -48,7 +49,7 @@ class ConfmgrPapers
      * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apPaper")
      * 
      */
-    private $paperAuthorAssociation;
+    private $paperAuthorAssociations;
 
     /**
      * @var paperFullPapers the full paper for this paper
@@ -71,26 +72,37 @@ class ConfmgrPapers
      * @ORM\JoinColumn(name="paper_theme_id", referencedColumnName="id")
      */
     private $paperTheme;
-
+    
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="paper_date_created", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $paperDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="paper_date_modified", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $paperDateModified;
+    
+     /**
+     * @Gedmo\Blameable(on="create")
+     * @ORM\Column(type="string")
+     */
+    private $paperCreatedBy;
+    /**
+     * @Gedmo\Blameable(on="update")
+     * @ORM\Column(type="string")
+     */
+    private $paperUpdatedBy;
+    
+  
     
     public function __construct() {
         $this->paperAbstracts = new ArrayCollection();
         $this->paperFullPapers = new ArrayCollection();
         $this->paperCameraReadyPapers = new ArrayCollection();
-        $this->paperAuthorAssociation = new ArrayCollection();
+        $this->paperAuthorAssociations = new ArrayCollection();
     }
     
     /**
@@ -136,18 +148,6 @@ class ConfmgrPapers
         return $this->paperTheme;
     }
 
-    /**
-     * Set paperDateCreated
-     *
-     * @param \DateTime $paperDateCreated
-     * @return ConfmgrPapers
-     */
-    public function setPaperDateCreated($paperDateCreated)
-    {
-        $this->paperDateCreated = $paperDateCreated;
-
-        return $this;
-    }
 
     /**
      * Get paperDateCreated
@@ -159,18 +159,6 @@ class ConfmgrPapers
         return $this->paperDateCreated;
     }
 
-    /**
-     * Set paperDateModified
-     *
-     * @param \DateTime $paperDateModified
-     * @return ConfmgrPapers
-     */
-    public function setPaperDateModified($paperDateModified)
-    {
-        $this->paperDateModified = $paperDateModified;
-
-        return $this;
-    }
 
     /**
      * Get paperDateModified
@@ -293,39 +281,6 @@ class ConfmgrPapers
 
         return $this;
     }
-
-    /**
-     * Add paperAuthors
-     *
-     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
-     * @return ConfmgrPapers
-     */
-    public function addPaperAuthor(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
-    {
-        $this->paperAuthorAssociation[] = $paperAuthorAssociation;
-
-        return $this;
-    }
-
-    /**
-     * Remove paperAuthors
-     *
-     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
-     */
-    public function removePaperAuthor(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
-    {
-        $this->paperAuthorAssociation->removeElement($paperAuthorAssociation);
-    }
-
-    /**
-     * Get paperAuthors
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPaperAuthorAssociations()
-    {
-        return $this->paperAuthorAssociation;
-    }
     
     public function __toString()
     {
@@ -336,34 +291,34 @@ class ConfmgrPapers
     /**
      * Add paperAuthorAssociation
      *
-     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociations
      * @return ConfmgrPapers
      */
-    public function addPaperAuthorAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    public function addPaperAuthorAssociations(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociations)
     {
-        $this->paperAuthorAssociation[] = $paperAuthorAssociation;
+        $this->paperAuthorAssociations[] = $paperAuthorAssociations;
 
         return $this;
     }
 
     /**
-     * Remove paperAuthorAssociation
+     * Remove paperAuthorAssociations
      *
      * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation
      */
-    public function removePaperAuthorAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociation)
+    public function removePaperAuthorAssociations(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $paperAuthorAssociations)
     {
-        $this->paperAuthorAssociation->removeElement($paperAuthorAssociation);
+        $this->paperAuthorAssociations->removeElement($paperAuthorAssociations);
     }
 
     /**
-     * Get paperAuthorAssociation
+     * Get paperAuthorAssociations
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPaperAuthorAssociation()
+    public function getPaperAuthorAssociations()
     {
-        return $this->paperAuthorAssociation;
+        return $this->paperAuthorAssociations;
     }
 
     /**
@@ -388,4 +343,27 @@ class ConfmgrPapers
     {
         return $this->Owner;
     }
+    
+    
+    /**
+     * Get createdBy
+     *
+     *
+     */
+    public function getPaperCreatedBy()
+    {
+        return $this->paperCreatedBy;
+    }
+    
+    /**
+     * Get updatedBy
+     *
+     *
+     */
+    public function getPaperUpdatedBy()
+    {
+        return $this->paperUpdatedBy;
+    }
+    
+    
 }

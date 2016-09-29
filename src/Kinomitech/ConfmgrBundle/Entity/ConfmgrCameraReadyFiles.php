@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrCameraReadyFiles
@@ -36,18 +37,29 @@ class ConfmgrCameraReadyFiles
     private $crFileUpload;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="cr_file_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $crFileDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="cr_file_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $crFileDateModified;
+    
+    /**
+     * @var crFileCameraPaper the camera ready paper related this files
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrCameraReadyPapers")
+     * @ORM\JoinColumn(name="cr_file_camera_ready_paper_id", referencedColumnName="id")
+     */
+    private $crFileCameraPaper;
+
 
 
     /**
@@ -107,19 +119,6 @@ class ConfmgrCameraReadyFiles
     }
 
     /**
-     * Set crFileDateCreated
-     *
-     * @param \DateTime $crFileDateCreated
-     * @return ConfmgrCameraReadyFiles
-     */
-    public function setCrFileDateCreated($crFileDateCreated)
-    {
-        $this->crFileDateCreated = $crFileDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get crFileDateCreated
      *
      * @return \DateTime 
@@ -127,19 +126,6 @@ class ConfmgrCameraReadyFiles
     public function getCrFileDateCreated()
     {
         return $this->crFileDateCreated;
-    }
-
-    /**
-     * Set crFileDateModified
-     *
-     * @param \DateTime $crFileDateModified
-     * @return ConfmgrCameraReadyFiles
-     */
-    public function setCrFileDateModified($crFileDateModified)
-    {
-        $this->crFileDateModified = $crFileDateModified;
-
-        return $this;
     }
 
     /**

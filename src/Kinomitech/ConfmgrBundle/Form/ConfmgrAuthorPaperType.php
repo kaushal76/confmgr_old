@@ -15,7 +15,9 @@ class ConfmgrAuthorPaperType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('apPosition')
+            //->add('apPosition')
+            //->add('apDateCreated', 'datetime')
+            //->add('apDateModified', 'datetime')
             ->add('apAuthor')
             ->add('apPaper')
         ;

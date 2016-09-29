@@ -4,6 +4,8 @@ namespace Kinomitech\ConfmgrBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity
@@ -24,6 +26,22 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="ConfmgrPapers", mappedBy="Owner")
      */
     private $userPapers;
+    
+     /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $userDateCreated;
+
+    /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $userDateModified;
     
     
 
@@ -64,5 +82,25 @@ class User extends BaseUser
     public function getUserPapers()
     {
         return $this->userPapers;
+    }
+    
+       /**
+     * Get themeDateCreated
+     *
+     * @return \DateTime 
+     */
+    public function getUserDateCreated()
+    {
+        return $this->userDateCreated;
+    }
+
+    /**
+     * Get themeDateModified
+     *
+     * @return \DateTime 
+     */
+    public function getUserDateModified()
+    {
+        return $this->userDateModified;
     }
 }

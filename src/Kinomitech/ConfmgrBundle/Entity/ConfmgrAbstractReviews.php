@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrAbstractReviews
@@ -52,18 +53,20 @@ class ConfmgrAbstractReviews
     private $abstractReviewAbstract;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="abstract_review_file_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $abstractReviewFileDateCreated;
+    private $abstractReviewDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="abstract_review_file_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $abstractReviewFileDateModified;
+    private $abstractReviewDateModified;
 
 
     /**
@@ -145,49 +148,24 @@ class ConfmgrAbstractReviews
         return $this->abstractReviewRecommendation;
     }
 
-    /**
-     * Set abstractReviewFileDateCreated
-     *
-     * @param \DateTime $abstractReviewFileDateCreated
-     * @return ConfmgrAbstractReviews
-     */
-    public function setAbstractReviewFileDateCreated($abstractReviewFileDateCreated)
-    {
-        $this->abstractReviewFileDateCreated = $abstractReviewFileDateCreated;
-
-        return $this;
-    }
 
     /**
-     * Get abstractReviewFileDateCreated
+     * Get abstractReviewDateCreated
      *
      * @return \DateTime 
      */
     public function getAbstractReviewFileDateCreated()
     {
-        return $this->abstractReviewFileDateCreated;
+        return $this->abstractReviewDateCreated;
     }
 
     /**
-     * Set abstractReviewFileDateModified
-     *
-     * @param \DateTime $abstractReviewFileDateModified
-     * @return ConfmgrAbstractReviews
-     */
-    public function setAbstractReviewFileDateModified($abstractReviewFileDateModified)
-    {
-        $this->abstractReviewFileDateModified = $abstractReviewFileDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get abstractReviewFileDateModified
+     * Get abstractReviewDateModified
      *
      * @return \DateTime 
      */
     public function getAbstractReviewFileDateModified()
     {
-        return $this->abstractReviewFileDateModified;
+        return $this->abstractReviewDateModified;
     }
 }

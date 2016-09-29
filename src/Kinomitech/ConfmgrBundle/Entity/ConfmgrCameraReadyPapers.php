@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrCameraReadyPapers
@@ -28,17 +29,19 @@ class ConfmgrCameraReadyPapers
      */
     private $cameraApproval;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="camera_date_created", type="datetime")
+   /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $cameraDateCreated;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="camera_date_modified", type="datetime")
+   /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $cameraDateModified;
     
@@ -49,6 +52,13 @@ class ConfmgrCameraReadyPapers
      * @ORM\JoinColumn(name="camera_paper_id", referencedColumnName="id")
      */
     private $cameraPaper;
+    
+    /**
+     * @var cameraFiles the files for the camera ready paper
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrCameraReadyFiles", mappedBy="crFileCameraPaper")
+     */
+    private $cameraFiles;
 
 
     /**
@@ -85,19 +95,6 @@ class ConfmgrCameraReadyPapers
     }
 
     /**
-     * Set cameraDateCreated
-     *
-     * @param \DateTime $cameraDateCreated
-     * @return ConfmgrCameraReadyPapers
-     */
-    public function setCameraDateCreated($cameraDateCreated)
-    {
-        $this->cameraDateCreated = $cameraDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get cameraDateCreated
      *
      * @return \DateTime 
@@ -105,19 +102,6 @@ class ConfmgrCameraReadyPapers
     public function getCameraDateCreated()
     {
         return $this->cameraDateCreated;
-    }
-
-    /**
-     * Set cameraDateModified
-     *
-     * @param \DateTime $cameraDateModified
-     * @return ConfmgrCameraReadyPapers
-     */
-    public function setCameraDateModified($cameraDateModified)
-    {
-        $this->cameraDateModified = $cameraDateModified;
-
-        return $this;
     }
 
     /**

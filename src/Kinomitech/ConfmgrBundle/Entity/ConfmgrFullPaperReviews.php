@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrFullPaperReviews
@@ -36,23 +37,26 @@ class ConfmgrFullPaperReviews
     private $fpReviewScore;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="fp_review_recommendation", type="integer")
+     * @var fpReviewRecommendation the Recommendation related this review
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrReviewOutcomes")
+     * @ORM\JoinColumn(name="fp_review_recommendation_id", referencedColumnName="id")
      */
     private $fpReviewRecommendation;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fp_review_file_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $fpReviewFileDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fp_review_file_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $fpReviewFileDateModified;
 
@@ -137,19 +141,6 @@ class ConfmgrFullPaperReviews
     }
 
     /**
-     * Set fpReviewFileDateCreated
-     *
-     * @param \DateTime $fpReviewFileDateCreated
-     * @return ConfmgrFullPaperReviews
-     */
-    public function setFpReviewFileDateCreated($fpReviewFileDateCreated)
-    {
-        $this->fpReviewFileDateCreated = $fpReviewFileDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get fpReviewFileDateCreated
      *
      * @return \DateTime 
@@ -157,19 +148,6 @@ class ConfmgrFullPaperReviews
     public function getFpReviewFileDateCreated()
     {
         return $this->fpReviewFileDateCreated;
-    }
-
-    /**
-     * Set fpReviewFileDateModified
-     *
-     * @param \DateTime $fpReviewFileDateModified
-     * @return ConfmgrFullPaperReviews
-     */
-    public function setFpReviewFileDateModified($fpReviewFileDateModified)
-    {
-        $this->fpReviewFileDateModified = $fpReviewFileDateModified;
-
-        return $this;
     }
 
     /**

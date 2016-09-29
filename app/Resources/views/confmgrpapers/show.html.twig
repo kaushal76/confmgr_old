@@ -21,6 +21,14 @@
                 <th>Paperdatemodified</th>
                 <td>{% if confmgrPaper.paperDateModified %}{{ confmgrPaper.paperDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+            <tr>
+                <th>Papercreatedby</th>
+                <td>{{ confmgrPaper.paperCreatedBy }}</td>
+            </tr>
+            <tr>
+                <th>Paperupdatedby</th>
+                <td>{{ confmgrPaper.paperUpdatedBy }}</td>
+            </tr>
         </tbody>
     </table>
 

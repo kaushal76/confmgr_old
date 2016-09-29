@@ -4,6 +4,7 @@ namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrThemes
@@ -43,16 +44,18 @@ class ConfmgrThemes
     protected $themePapers;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="theme_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $themeDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="theme_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $themeDateModified;
     
@@ -120,19 +123,6 @@ class ConfmgrThemes
     }
 
     /**
-     * Set themeDateCreated
-     *
-     * @param \DateTime $themeDateCreated
-     * @return ConfmgrThemes
-     */
-    public function setThemeDateCreated($themeDateCreated)
-    {
-        $this->themeDateCreated = $themeDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get themeDateCreated
      *
      * @return \DateTime 
@@ -140,19 +130,6 @@ class ConfmgrThemes
     public function getThemeDateCreated()
     {
         return $this->themeDateCreated;
-    }
-
-    /**
-     * Set themeDateModified
-     *
-     * @param \DateTime $themeDateModified
-     * @return ConfmgrThemes
-     */
-    public function setThemeDateModified($themeDateModified)
-    {
-        $this->themeDateModified = $themeDateModified;
-
-        return $this;
     }
 
     /**

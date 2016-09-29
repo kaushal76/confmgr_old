@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrFullPapers
@@ -36,16 +37,18 @@ class ConfmgrFullPapers
     private $fullReviewOutcome;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="full_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $fullDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="full_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $fullDateModified;
     
@@ -56,6 +59,13 @@ class ConfmgrFullPapers
      * @ORM\JoinColumn(name="full_paper_id", referencedColumnName="id")
      */
     private $fullPaper;
+    
+    /**
+     * @var fullFiles the files for the fullpaper
+     * 
+     * @ORM\OneToMany(targetEntity="ConfmgrFullPaperFiles", mappedBy="fpFileFullPaper")
+     */
+    private $fullFiles;
 
 
     /**
@@ -115,19 +125,6 @@ class ConfmgrFullPapers
     }
 
     /**
-     * Set fullDateCreated
-     *
-     * @param \DateTime $fullDateCreated
-     * @return ConfmgrFullPapers
-     */
-    public function setFullDateCreated($fullDateCreated)
-    {
-        $this->fullDateCreated = $fullDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get fullDateCreated
      *
      * @return \DateTime 
@@ -135,19 +132,6 @@ class ConfmgrFullPapers
     public function getFullDateCreated()
     {
         return $this->fullDateCreated;
-    }
-
-    /**
-     * Set fullDateModified
-     *
-     * @param \DateTime $fullDateModified
-     * @return ConfmgrFullPapers
-     */
-    public function setFullDateModified($fullDateModified)
-    {
-        $this->fullDateModified = $fullDateModified;
-
-        return $this;
     }
 
     /**

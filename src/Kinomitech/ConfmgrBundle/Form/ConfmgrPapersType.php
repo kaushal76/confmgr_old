@@ -16,8 +16,10 @@ class ConfmgrPapersType extends AbstractType
     {
         $builder
             ->add('paperTitle')
-            ->add('paperDateCreated', 'datetime')
-            ->add('paperDateModified', 'datetime')
+            //->add('paperDateCreated', 'datetime')
+            //->add('paperDateModified', 'datetime')
+            //->add('paperCreatedBy')
+            //->add('paperUpdatedBy')
             ->add('Owner')
             ->add('paperTheme')
         ;

@@ -3,6 +3,7 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrFullPaperFiles
@@ -36,18 +37,28 @@ class ConfmgrFullPaperFiles
     private $fpFileUpload;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fp_file_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $fpFileDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fp_file_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $fpFileDateModified;
+    
+    /**
+     * @var fpFileFullPaper the full paper related this files
+     * 
+     * @ORM\ManyToOne(targetEntity="ConfmgrFullPapers")
+     * @ORM\JoinColumn(name="fp_file_paper_id", referencedColumnName="id")
+     */
+    private $fpFileFullPaper;
 
 
     /**
@@ -107,19 +118,6 @@ class ConfmgrFullPaperFiles
     }
 
     /**
-     * Set fpFileDateCreated
-     *
-     * @param \DateTime $fpFileDateCreated
-     * @return ConfmgrFullPaperFiles
-     */
-    public function setFpFileDateCreated($fpFileDateCreated)
-    {
-        $this->fpFileDateCreated = $fpFileDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get fpFileDateCreated
      *
      * @return \DateTime 
@@ -127,19 +125,6 @@ class ConfmgrFullPaperFiles
     public function getFpFileDateCreated()
     {
         return $this->fpFileDateCreated;
-    }
-
-    /**
-     * Set fpFileDateModified
-     *
-     * @param \DateTime $fpFileDateModified
-     * @return ConfmgrFullPaperFiles
-     */
-    public function setFpFileDateModified($fpFileDateModified)
-    {
-        $this->fpFileDateModified = $fpFileDateModified;
-
-        return $this;
     }
 
     /**

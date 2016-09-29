@@ -13,6 +13,14 @@
                 <th>Apposition</th>
                 <td>{{ confmgrAuthorPaper.apPosition }}</td>
             </tr>
+            <tr>
+                <th>Apdatecreated</th>
+                <td>{% if confmgrAuthorPaper.apDateCreated %}{{ confmgrAuthorPaper.apDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Apdatemodified</th>
+                <td>{% if confmgrAuthorPaper.apDateModified %}{{ confmgrAuthorPaper.apDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
         </tbody>
     </table>
 

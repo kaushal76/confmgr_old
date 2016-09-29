@@ -19,8 +19,8 @@ class ConfmgrAuthorsType extends AbstractType
             ->add('authorFirstName')
             ->add('authorSurname')
             ->add('authorAffiliation')
-            ->add('authorDateCreated', 'datetime')
-            ->add('authorDateModified', 'datetime')
+            //->add('authorDateCreated', 'datetime')
+            //->add('authorDateModified', 'datetime')
         ;
     }
     

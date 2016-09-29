@@ -44,10 +44,8 @@ class ConfmgrPapersController extends Controller
         $confmgrPaper = new ConfmgrPapers();
         $form = $this->createForm('Kinomitech\ConfmgrBundle\Form\ConfmgrPapersType', $confmgrPaper);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
-            $confmgrPaper->setOwner($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($confmgrPaper);
             $em->flush();

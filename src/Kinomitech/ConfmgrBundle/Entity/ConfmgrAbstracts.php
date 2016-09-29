@@ -4,6 +4,7 @@ namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ConfmgrAbstracts
@@ -59,16 +60,18 @@ class ConfmgrAbstracts
     protected $abstractReviews;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="abstract_date_created", type="datetime")
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * 
+     * @ORM\Column(type="datetime")
      */
     private $abstractDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="abstract_date_modified", type="datetime")
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * 
+     * @ORM\Column(type="datetime")
      */
     private $abstractDateModified;
     
@@ -160,18 +163,6 @@ class ConfmgrAbstracts
         return $this->abstractEditorsComment;
     }
 
-    /**
-     * Set abstractDateCreated
-     *
-     * @param \DateTime $abstractDateCreated
-     * @return ConfmgrAbstracts
-     */
-    public function setAbstractDateCreated($abstractDateCreated)
-    {
-        $this->abstractDateCreated = $abstractDateCreated;
-
-        return $this;
-    }
 
     /**
      * Get abstractDateCreated
@@ -183,18 +174,6 @@ class ConfmgrAbstracts
         return $this->abstractDateCreated;
     }
 
-    /**
-     * Set abstractDateModified
-     *
-     * @param \DateTime $abstractDateModified
-     * @return ConfmgrAbstracts
-     */
-    public function setAbstractDateModified($abstractDateModified)
-    {
-        $this->abstractDateModified = $abstractDateModified;
-
-        return $this;
-    }
 
     /**
      * Get abstractDateModified

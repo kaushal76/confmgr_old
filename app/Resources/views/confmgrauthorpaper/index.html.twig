@@ -8,6 +8,8 @@
             <tr>
                 <th>Id</th>
                 <th>Apposition</th>
+                <th>Apdatecreated</th>
+                <th>Apdatemodified</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +18,8 @@
             <tr>
                 <td><a href="{{ path('authorpaper_show', { 'id': confmgrAuthorPaper.id }) }}">{{ confmgrAuthorPaper.id }}</a></td>
                 <td>{{ confmgrAuthorPaper.apPosition }}</td>
+                <td>{% if confmgrAuthorPaper.apDateCreated %}{{ confmgrAuthorPaper.apDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if confmgrAuthorPaper.apDateModified %}{{ confmgrAuthorPaper.apDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>

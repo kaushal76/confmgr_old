@@ -3,12 +3,14 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * AuthorPaper
  *
  * @ORM\Table(name="confmgr_author_paper")
  * @ORM\Entity(repositoryClass="Kinomitech\ConfmgrBundle\Repository\ConfmgrAuthorPaperRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  */
 class ConfmgrAuthorPaper
 {
@@ -28,17 +30,34 @@ class ConfmgrAuthorPaper
     private $apAuthor;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAuthorAssociation")
      * @ORM\JoinColumn(name="ap_paper_id", referencedColumnName="id")
      */
     private $apPaper;
 
     /**
-     * @var int
+     * @Gedmo\SortablePosition
      *
      * @ORM\Column(name="ap_position", type="integer")
      */
     private $apPosition;
+    
+    /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $apDateCreated;
+    
+    /**
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $apDateModified;
 
 
     /**
@@ -118,5 +137,25 @@ class ConfmgrAuthorPaper
     public function getApPosition()
     {
         return $this->apPosition;
+    }
+    
+    /**
+     * Get apDateCreated
+     *
+     * @return \DateTime 
+     */
+    public function getapDateCreated()
+    {
+        return $this->apDateCreated;
+    }  
+    
+    /**
+     * Get apDateModified
+     *
+     * @return \DateTime 
+     */
+    public function getapDateModified()
+    {
+        return $this->apDateModified;
     }
 }

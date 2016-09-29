@@ -3,6 +3,8 @@
 namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ConfmgrAuthors
@@ -47,26 +49,29 @@ class ConfmgrAuthors
      *
      * @ORM\Column(name="author_affiliation", type="string", length=255, nullable=true)
      */
+    
     private $authorAffiliation;
     
-     /**
+    /**
      * @var authorPapers the papers for the author
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apAuthor")
      */
-    private $authorPaperAssociation;
+    private $authorPaperAssociations;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="author_date_created", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $authorDateCreated;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="author_date_modified", type="datetime")
+     * @var datetime
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $authorDateModified;
 
@@ -174,19 +179,6 @@ class ConfmgrAuthors
     }
 
     /**
-     * Set authorDateCreated
-     *
-     * @param \DateTime $authorDateCreated
-     * @return ConfmgrAuthors
-     */
-    public function setAuthorDateCreated($authorDateCreated)
-    {
-        $this->authorDateCreated = $authorDateCreated;
-
-        return $this;
-    }
-
-    /**
      * Get authorDateCreated
      *
      * @return \DateTime 
@@ -196,18 +188,6 @@ class ConfmgrAuthors
         return $this->authorDateCreated;
     }
 
-    /**
-     * Set authorDateModified
-     *
-     * @param \DateTime $authorDateModified
-     * @return ConfmgrAuthors
-     */
-    public function setAuthorDateModified($authorDateModified)
-    {
-        $this->authorDateModified = $authorDateModified;
-
-        return $this;
-    }
 
     /**
      * Get authorDateModified
@@ -223,18 +203,18 @@ class ConfmgrAuthors
      */
     public function __construct()
     {
-        $this->authorPaperAssociation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->authorPaperAssociations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Add authorPapers
      *
-     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociations
      * @return ConfmgrAuthors
      */
-    public function addAuthorPaperAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation)
+    public function addAuthorPaperAssociations(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociations)
     {
-        $this->authorPaperAssociation[] = $authorPaperAssociation;
+        $this->authorPaperAssociations[] = $authorPaperAssociations;
 
         return $this;
     }
@@ -242,21 +222,11 @@ class ConfmgrAuthors
     /**
      * Remove authorPapers
      *
-     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation
+     * @param \Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociations
      */
-    public function removeAuthorPaperAssociation(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociation)
+    public function removeAuthorPaperAssociations(\Kinomitech\ConfmgrBundle\Entity\ConfmgrAuthorPaper $authorPaperAssociations)
     {
-        $this->authorPaperAssociation->removeElement($authorPaperAssociation);
-    }
-
-    /**
-     * Get authorPapers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAuthorPaperAssociations()
-    {
-        return $this->authorPaperAssociation;
+        $this->authorPaperAssociations->removeElement($authorPaperAssociations);
     }
     
     public function __toString()
@@ -265,12 +235,12 @@ class ConfmgrAuthors
     }
 
     /**
-     * Get authorPaperAssociation
+     * Get authorPaperAssociations
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAuthorPaperAssociation()
+    public function getAuthorPaperAssociations()
     {
-        return $this->authorPaperAssociation;
+        return $this->authorPaperAssociations;
     }
 }
