@@ -1,49 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>ConfmgrAuthors list</h1>
-
-    <table>
-        <thead>
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>Authors List</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>Id</th>
-                <th>Authortitle</th>
-                <th>Authorfirstname</th>
-                <th>Authorsurname</th>
-                <th>Authoraffiliation</th>
-                <th>Authordatecreated</th>
-                <th>Authordatemodified</th>
+                <th>Title</th>
+                <th>Firstname</th>
+                <th>Surname</th>
+                <th>Affiliation</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for confmgrAuthor in confmgrAuthors %}
-            <tr>
-                <td><a href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">{{ confmgrAuthor.id }}</a></td>
-                <td>{{ confmgrAuthor.authorTitle }}</td>
-                <td>{{ confmgrAuthor.authorFirstName }}</td>
-                <td>{{ confmgrAuthor.authorSurname }}</td>
-                <td>{{ confmgrAuthor.authorAffiliation }}</td>
-                <td>{% if confmgrAuthor.authorDateCreated %}{{ confmgrAuthor.authorDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if confmgrAuthor.authorDateModified %}{{ confmgrAuthor.authorDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('authors_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+            </thead>
+            <tbody>
+            {% for confmgrAuthor in confmgrAuthors %}
+                <tr>
+                    <td><a href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">{{ confmgrAuthor.id }}</a>
+                    </td>
+                    <td>{{ confmgrAuthor.authorTitle }}</td>
+                    <td>{{ confmgrAuthor.authorFirstName }}</td>
+                    <td>{{ confmgrAuthor.authorSurname }}</td>
+                    <td>{{ confmgrAuthor.authorAffiliation }}</td>
+                    <td>
+                        <a class="btn btn-default" role="button"
+                           href="{{ path('authors_show', { 'id': confmgrAuthor.id }) }}">show</a>
+                        <a class="btn btn-default" role="button"
+                           href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <a class="btn btn-default" role="button" href="{{ path('authors_new') }}">Create a new entry</a>
+        </div>
+    </div>
 {% endblock %}

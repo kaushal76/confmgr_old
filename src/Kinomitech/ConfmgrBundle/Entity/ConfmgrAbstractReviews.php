@@ -37,6 +37,22 @@ class ConfmgrAbstractReviews
     private $abstractReviewScore;
 
     /**
+     * @return abstractReviewAbstract
+     */
+    public function getAbstractReviewAbstract()
+    {
+        return $this->abstractReviewAbstract;
+    }
+
+    /**
+     * @param abstractReviewAbstract $abstractReviewAbstract
+     */
+    public function setAbstractReviewAbstract($abstractReviewAbstract)
+    {
+        $this->abstractReviewAbstract = $abstractReviewAbstract;
+    }
+
+    /**
      * @var abstractReviewRecommendation the Recommendation related this review
      * 
      * @ORM\ManyToOne(targetEntity="ConfmgrReviewOutcomes")

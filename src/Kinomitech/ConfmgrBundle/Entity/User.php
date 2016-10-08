@@ -21,14 +21,14 @@ class User extends BaseUser
     protected $id;
     
     /**
-     * @var userPapers the papers owned by the user
+     * userPapers the papers owned by the user
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrPapers", mappedBy="Owner")
      */
     private $userPapers;
     
      /**
-     * @var datetime
+     *
      * 
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -36,20 +36,89 @@ class User extends BaseUser
     private $userDateCreated;
 
     /**
-     * @var datetime
+     *
      * 
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $userDateModified;
-    
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $userFirstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surname", type="string", length=255)
+     */
+    private $userSurname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="affiliation", type="string", length=255)
+     */
+    private $userAffiliation;
 
     public function __construct()
     {
         parent::__construct();
         $this->userPapers = new ArrayCollection();
     }
+
+    /**
+     * @return string
+     */
+    public function getUserFirstName()
+    {
+        return $this->userFirstName;
+    }
+
+    /**
+     * @param string $userFirstName
+     */
+    public function setUserFirstName($userFirstName)
+    {
+        $this->userFirstName = $userFirstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserSurname()
+    {
+        return $this->userSurname;
+    }
+
+    /**
+     * @param string $userSurname
+     */
+    public function setUserSurname($userSurname)
+    {
+        $this->userSurname = $userSurname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserAffiliation()
+    {
+        return $this->userAffiliation;
+    }
+
+    /**
+     * @param string $userAffiliation
+     */
+    public function setUserAffiliation($userAffiliation)
+    {
+        $this->userAffiliation = $userAffiliation;
+    }
+    
+
 
     /**
      * Add userPapers
@@ -87,7 +156,7 @@ class User extends BaseUser
        /**
      * Get themeDateCreated
      *
-     * @return \DateTime 
+     * @return \datetime
      */
     public function getUserDateCreated()
     {
@@ -97,7 +166,7 @@ class User extends BaseUser
     /**
      * Get themeDateModified
      *
-     * @return \DateTime 
+     * @return \datetime
      */
     public function getUserDateModified()
     {

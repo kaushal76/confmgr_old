@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>ConfmgrAuthors creation</h1>
+{% block content %}
+    <h1>Authors creation</h1>
+    {{ form_start(form, {
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        'attr': {
+            'novalidate': 'novalidate',
+            'method': 'post',
+            'action': path('authors_new')
+        }
+
+    }) }}
+    {{ form_widget(form) }}
+    <input class="btn btn-default" type="submit" value="Create"/>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('authors_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <a class="btn btn-default" role="button" href="{{ path('authors_index') }}">Back to the list</a>
 {% endblock %}

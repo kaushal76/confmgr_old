@@ -60,6 +60,39 @@ class ConfmgrAuthorsController extends Controller
     }
 
     /**
+     * Creates a new ConfmgrAuthors entity in a modal.
+     *
+     * @Route("/new/modal", name="authors_new_modal")
+     * @Method({"GET", "POST"})
+     */
+    public function newModalAction(Request $request)
+    {
+        $confmgrAuthor = new ConfmgrAuthors();
+        $form = $this->createForm('Kinomitech\ConfmgrBundle\Form\ConfmgrAuthorsType', $confmgrAuthor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($confmgrAuthor);
+                $em->flush();
+
+                return $this->redirectToRoute('authors_show', array('id' => $confmgrAuthor->getId()));
+            }else{
+                return $this->render('confmgrauthors/modal.new.html.twig', array(
+                    'confmgrAuthor' => $confmgrAuthor,
+                    'form' => $form->createView(),
+                ));
+            }
+        }
+
+        return $this->render('confmgrauthors/modal.new.html.twig', array(
+            'confmgrAuthor' => $confmgrAuthor,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * Finds and displays a ConfmgrAuthors entity.
      *
      * @Route("/{id}", name="authors_show")
@@ -134,7 +167,6 @@ class ConfmgrAuthorsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('authors_delete', array('id' => $confmgrAuthor->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

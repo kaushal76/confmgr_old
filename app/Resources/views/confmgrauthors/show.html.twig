@@ -1,52 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>ConfmgrAuthors</h1>
-
-    <table>
-        <tbody>
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>Authors</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <th>Id</th>
-                <td>{{ confmgrAuthor.id }}</td>
+                <th colspan="2">Author details for Author ID {{ confmgrAuthor.id }}</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
-                <th>Authortitle</th>
+                <th class="text-right">Title</th>
                 <td>{{ confmgrAuthor.authorTitle }}</td>
             </tr>
             <tr>
-                <th>Authorfirstname</th>
+                <th class="text-right">Firstname</th>
                 <td>{{ confmgrAuthor.authorFirstName }}</td>
             </tr>
             <tr>
-                <th>Authorsurname</th>
+                <th class="text-right">Surname</th>
                 <td>{{ confmgrAuthor.authorSurname }}</td>
             </tr>
             <tr>
-                <th>Authoraffiliation</th>
+                <th class="text-right">Affiliation</th>
                 <td>{{ confmgrAuthor.authorAffiliation }}</td>
             </tr>
             <tr>
-                <th>Authordatecreated</th>
+                <th class="text-right">Date created</th>
                 <td>{% if confmgrAuthor.authorDateCreated %}{{ confmgrAuthor.authorDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Authordatemodified</th>
+                <th class="text-right">Date modified</th>
                 <td>{% if confmgrAuthor.authorDateModified %}{{ confmgrAuthor.authorDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('authors_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">Edit</a>
-        </li>
-        <li>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <a class="btn btn-default" role="button" href="{{ path('authors_index') }}">Back to the list</a>
+            <a class="btn btn-default" role="button"
+               href="{{ path('authors_edit', { 'id': confmgrAuthor.id }) }}">Edit</a>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-default" type="submit" value="Delete">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

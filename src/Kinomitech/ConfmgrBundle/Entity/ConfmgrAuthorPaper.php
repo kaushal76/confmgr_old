@@ -24,14 +24,14 @@ class ConfmgrAuthorPaper
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ConfmgrAuthors", inversedBy="authorPaperAssociations")
+     * @ORM\ManyToOne(targetEntity="ConfmgrAuthors", inversedBy="authorPaperAssociations", cascade={"persist"})
      * @ORM\JoinColumn(name="ap_author_id", referencedColumnName="id")
      */
     private $apAuthor;
 
     /**
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAuthorAssociations")
+     * @ORM\ManyToOne(targetEntity="ConfmgrPapers", inversedBy="paperAuthorAssociations", cascade={"persist"})
      * @ORM\JoinColumn(name="ap_paper_id", referencedColumnName="id")
      */
     private $apPaper;
@@ -157,5 +157,10 @@ class ConfmgrAuthorPaper
     public function getapDateModified()
     {
         return $this->apDateModified;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->apAuthor;
     }
 }

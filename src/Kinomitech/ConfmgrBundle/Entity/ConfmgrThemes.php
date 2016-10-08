@@ -44,6 +44,27 @@ class ConfmgrThemes
     protected $themePapers;
 
     /**
+     * @ORM\ManytoMany(targetEntity="Kinomitech\ConfmgrBundle\Entity\User")
+     */
+    protected $themeLeaders;
+
+    /**
+     * @return mixed
+     */
+    public function getThemeLeaders()
+    {
+        return $this->themeLeaders;
+    }
+
+    /**
+     * @param mixed $themeLeaders
+     */
+    public function setThemeLeaders(User $themeLeaders)
+    {
+        $this->themeLeaders[] = $themeLeaders;
+    }
+
+    /**
      * @var datetime
      * 
      * @Gedmo\Timestampable(on="create")
@@ -63,6 +84,7 @@ class ConfmgrThemes
     
     public function __construct() {
         $this->themePapers = new ArrayCollection();
+        $this->themeLeaders = new ArrayCollection();
     }
     
 
@@ -140,5 +162,11 @@ class ConfmgrThemes
     public function getThemeDateModified()
     {
         return $this->themeDateModified;
+    }
+
+    public function __toString()
+    {
+        return $this->getThemeTitle();
+
     }
 }

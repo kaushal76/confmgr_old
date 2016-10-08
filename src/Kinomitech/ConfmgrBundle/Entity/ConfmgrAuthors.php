@@ -4,7 +4,7 @@ namespace Kinomitech\ConfmgrBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ConfmgrAuthors
@@ -25,6 +25,7 @@ class ConfmgrAuthors
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="author_title", type="string", length=255)
      */
@@ -32,6 +33,7 @@ class ConfmgrAuthors
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="author_first_name", type="string", length=255)
      */
@@ -39,13 +41,14 @@ class ConfmgrAuthors
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="author_surname", type="string", length=255)
      */
     private $authorSurname;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="author_affiliation", type="string", length=255, nullable=true)
      */
@@ -53,14 +56,15 @@ class ConfmgrAuthors
     private $authorAffiliation;
     
     /**
-     * @var authorPapers the papers for the author
+     * @var authorPaperAssociation the papers for the author
+     *
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apAuthor")
      */
     private $authorPaperAssociations;
 
     /**
-     * @var datetime
+     *
      * 
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -68,7 +72,7 @@ class ConfmgrAuthors
     private $authorDateCreated;
 
     /**
-     * @var datetime
+     *
      * 
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
@@ -181,7 +185,7 @@ class ConfmgrAuthors
     /**
      * Get authorDateCreated
      *
-     * @return \DateTime 
+     * @return \datetime
      */
     public function getAuthorDateCreated()
     {
@@ -192,7 +196,7 @@ class ConfmgrAuthors
     /**
      * Get authorDateModified
      *
-     * @return \DateTime 
+     * @return \datetime
      */
     public function getAuthorDateModified()
     {

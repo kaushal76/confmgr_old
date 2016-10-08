@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class ConfmgrPapersType extends AbstractType
 {
     /**
@@ -16,12 +17,8 @@ class ConfmgrPapersType extends AbstractType
     {
         $builder
             ->add('paperTitle')
-            //->add('paperDateCreated', 'datetime')
-            //->add('paperDateModified', 'datetime')
-            //->add('paperCreatedBy')
-            //->add('paperUpdatedBy')
-            ->add('Owner')
             ->add('paperTheme')
+            //->add('paperAuthorAssociations')
         ;
     }
     

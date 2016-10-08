@@ -1,48 +1,44 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>ConfmgrPapers</h1>
-
-    <table>
-        <tbody>
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Paper</h1>
+        </div>
+        <table class="table table-striped">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ confmgrPaper.id }}</td>
             </tr>
             <tr>
-                <th>Papertitle</th>
+                <th>Title</th>
                 <td>{{ confmgrPaper.paperTitle }}</td>
             </tr>
             <tr>
-                <th>Paperdatecreated</th>
+                <th>Date created</th>
                 <td>{% if confmgrPaper.paperDateCreated %}{{ confmgrPaper.paperDateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Paperdatemodified</th>
+                <th>Date modified</th>
                 <td>{% if confmgrPaper.paperDateModified %}{{ confmgrPaper.paperDateModified|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Papercreatedby</th>
+                <th>Created by</th>
                 <td>{{ confmgrPaper.paperCreatedBy }}</td>
             </tr>
             <tr>
-                <th>Paperupdatedby</th>
+                <th>Updated by</th>
                 <td>{{ confmgrPaper.paperUpdatedBy }}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('papers_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('papers_edit', { 'id': confmgrPaper.id }) }}">Edit</a>
-        </li>
-        <li>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <a role="button" class="btn btn-default" href="{{ path('papers_index') }}">Back to the list</a>
+            <a role="button" class="btn btn-default"
+               href="{{ path('papers_edit', { 'id': confmgrPaper.id }) }}">Edit</a>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-default" type="submit" value="Delete" style="display: inline">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

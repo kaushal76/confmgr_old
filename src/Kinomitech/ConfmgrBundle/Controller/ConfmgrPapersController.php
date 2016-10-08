@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Kinomitech\ConfmgrBundle\Entity\ConfmgrPapers;
 use Kinomitech\ConfmgrBundle\Form\ConfmgrPapersType;
+use Kinomitech\ConfmgrBundle\Entity;
 
 /**
  * ConfmgrPapers controller.
@@ -42,8 +43,10 @@ class ConfmgrPapersController extends Controller
     public function newAction(Request $request)
     {
         $confmgrPaper = new ConfmgrPapers();
+        $authors = new Entity\ConfmgrAuthorPaper();
         $form = $this->createForm('Kinomitech\ConfmgrBundle\Form\ConfmgrPapersType', $confmgrPaper);
         $form->handleRequest($request);
+        $authorData = $form->getData();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

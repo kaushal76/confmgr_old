@@ -31,7 +31,7 @@ class ConfmgrPapers
     private $paperTitle;
 
     /**
-     * @var PaperOwner the owner this paper belongs to
+     * PaperOwner the owner this paper belongs to
      * 
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userPapers")
      * 
@@ -39,34 +39,42 @@ class ConfmgrPapers
     private $Owner;
 
     /**
-     * @var paperAbstracts the abstracts for the paper
+     * paperAbstracts the abstracts for the paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrAbstracts", mappedBy="abstractPaper")
      */
     private $paperAbstracts;
     
     /**
-     * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apPaper")
+     * @ORM\OneToMany(targetEntity="ConfmgrAuthorPaper", mappedBy="apPaper", cascade={"persist"})
      * 
      */
     private $paperAuthorAssociations;
 
     /**
-     * @var paperFullPapers the full paper for this paper
+     * @return mixed
+     */
+    public function getPaperAuthorAssociations()
+    {
+        return $this->paperAuthorAssociations;
+    }
+
+    /**
+     * paperFullPapers the full paper for this paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrFullPapers", mappedBy="fullPaper")
      */
     private $paperFullPapers;
 
     /**
-     * @var paperCameraReadyPapers the camera ready paper for this paper
+     * paperCameraReadyPapers the camera ready paper for this paper
      * 
      * @ORM\OneToMany(targetEntity="ConfmgrCameraReadyPapers", mappedBy="cameraPaper")
      */
     private $paperCameraReadyPapers;
     
     /**
-     * @var PaperTheme the theme this paper belongs
+     * PaperTheme the theme this paper belongs
      * 
      * @ORM\ManyToOne(targetEntity="ConfmgrThemes", inversedBy="themePapers")
      * @ORM\JoinColumn(name="paper_theme_id", referencedColumnName="id")
@@ -95,9 +103,8 @@ class ConfmgrPapers
      * @ORM\Column(type="string")
      */
     private $paperUpdatedBy;
-    
-  
-    
+
+
     public function __construct() {
         $this->paperAbstracts = new ArrayCollection();
         $this->paperFullPapers = new ArrayCollection();
@@ -141,7 +148,7 @@ class ConfmgrPapers
     /**
      * Get paperTheme
      *
-     * @return integer 
+     * @return PaperTheme
      */
     public function getPaperTheme()
     {
@@ -312,13 +319,11 @@ class ConfmgrPapers
     }
 
     /**
-     * Get paperAuthorAssociations
-     *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param mixed $paperAuthorAssociations
      */
-    public function getPaperAuthorAssociations()
+    public function setPaperAuthorAssociations($paperAuthorAssociations)
     {
-        return $this->paperAuthorAssociations;
+        $this->paperAuthorAssociations = $paperAuthorAssociations;
     }
 
     /**
@@ -337,7 +342,7 @@ class ConfmgrPapers
     /**
      * Get Owner
      *
-     * @return \Kinomitech\ConfmgrBundle\Entity\User 
+     * @return \Kinomitech\ConfmgrBundle\Entity\User
      */
     public function getOwner()
     {
@@ -363,7 +368,7 @@ class ConfmgrPapers
     public function getPaperUpdatedBy()
     {
         return $this->paperUpdatedBy;
-    }
-    
+    } 
+            
     
 }
